@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yuanshen.mapper.TaskListMapper">
+    <resultMap id="BaseResultMap" type="org.yuanshen.domain.TaskList">
+        <id column="id" property="id"/>
+        <result column="tag" property="tag"/>
+        <result column="content" property="content"/>
+        <result column="money" property="money"/>
+        <result column="description" property="description"/>
+        <result column="main" property="main"/>
+        <result column="show" property="show"/>
+        <result column="cardshow" property="cardshow"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tag, content, money, description, main, show, cardshow
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from task_list
+        <where>
+            <if test="criteria.id != null">
+                and id = #{criteria.id}
+            </if>
+            <if test="criteria.money != null">
+                and money = #{criteria.money}
+            </if>
+            <if test="criteria.main != null">
+                and main = #{criteria.main}
+            </if>
+            <if test="criteria.cardshow != null">
+                and cardshow = #{criteria.cardshow}
+            </if>
+            <if test="criteria.show != null and criteria.show.size() > 0">
+                AND show BETWEEN #{criteria.show[0]} AND #{criteria.show[1]}
+            </if>
+        </where>
+        order by id desc
+    </select>
+</mapper>

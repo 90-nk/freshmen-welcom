@@ -175,12 +175,12 @@ export default {
     [CRUD.HOOK.afterRefresh]() {
       this.$refs.menu.setCheckedKeys([])
     },
-    // 新增前初始化部门信息
+    // 新增前初始化学院信息
     [CRUD.HOOK.beforeToAdd](crud, form) {
       this.deptDatas = []
       form.menus = null
     },
-    // 编辑前初始化自定义数据权限的部门信息
+    // 编辑前初始化自定义数据权限的学院信息
     [CRUD.HOOK.beforeToEdit](crud, form) {
       this.deptDatas = []
       if (form.dataScope === '自定义') {
@@ -281,7 +281,7 @@ export default {
         }
       })
     },
-    // 获取部门数据
+    // 获取学院数据
     getDepts() {
       getDepts({ enabled: true }).then(res => {
         this.depts = res.content.map(function(obj) {
@@ -313,7 +313,7 @@ export default {
         }
       })
     },
-    // 获取弹窗内部门数据
+    // 获取弹窗内学院数据
     loadDepts({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
         getDepts({ enabled: true, pid: parentNode.id }).then(res => {
@@ -329,7 +329,7 @@ export default {
         })
       }
     },
-    // 如果数据权限为自定义则获取部门数据
+    // 如果数据权限为自定义则获取学院数据
     changeScope() {
       if (this.form.dataScope === '自定义') {
         this.getDepts()

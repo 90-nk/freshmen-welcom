@@ -1,14 +1,14 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <!--侧边部门数据-->
+      <!--侧边学院数据-->
       <el-col :xs="9" :sm="6" :md="5" :lg="4" :xl="4">
         <div class="head-container">
           <el-input
             v-model="deptName"
             clearable
             size="small"
-            placeholder="输入部门名称搜索"
+            placeholder="输入学院名称搜索"
             prefix-icon="el-icon-search"
             class="filter-item"
             @input="getDeptDatas"
@@ -86,16 +86,16 @@
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="form.email" />
             </el-form-item>
-            <el-form-item label="部门" prop="dept.id">
+            <el-form-item label="学院" prop="dept.id">
               <treeselect
                 v-model="form.dept.id"
                 :options="depts"
                 :load-options="loadDepts"
                 style="width: 178px"
-                placeholder="选择部门"
+                placeholder="选择学院"
               />
             </el-form-item>
-            <el-form-item label="岗位" prop="jobs">
+            <el-form-item label="身份" prop="jobs">
               <el-select
                 v-model="jobDatas"
                 style="width: 178px"
@@ -159,7 +159,7 @@
           <el-table-column prop="gender" label="性别" />
           <el-table-column :show-overflow-tooltip="true" prop="phone" width="100" label="电话" />
           <el-table-column :show-overflow-tooltip="true" width="135" prop="email" label="邮箱" />
-          <el-table-column :show-overflow-tooltip="true" prop="dept" label="部门">
+          <el-table-column :show-overflow-tooltip="true" prop="dept" label="学院">
             <template slot-scope="scope">
               <div>{{ scope.row.dept.name }}</div>
             </template>
@@ -330,7 +330,7 @@ export default {
       this.jobDatas = []
       this.roleDatas = []
     },
-    // 初始化编辑时候的角色与岗位
+    // 初始化编辑时候的角色与身份
     [CRUD.HOOK.beforeToEdit](crud, form) {
       this.getJobs(this.form.dept.id)
       this.jobDatas = []
@@ -353,13 +353,13 @@ export default {
     [CRUD.HOOK.afterValidateCU](crud) {
       if (!crud.form.dept.id) {
         this.$message({
-          message: '部门不能为空',
+          message: '学院不能为空',
           type: 'warning'
         })
         return false
       } else if (this.jobDatas.length === 0) {
         this.$message({
-          message: '岗位不能为空',
+          message: '身份不能为空',
           type: 'warning'
         })
         return false
@@ -374,7 +374,7 @@ export default {
       crud.form.jobs = userJobs
       return true
     },
-    // 获取左侧部门数据
+    // 获取左侧学院数据
     getDeptDatas(node, resolve) {
       const params = {}
       if (typeof node !== 'object') {
@@ -421,7 +421,7 @@ export default {
         }
       })
     },
-    // 获取弹窗内部门数据
+    // 获取弹窗内学院数据
     loadDepts({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
         getDepts({ enabled: true, pid: parentNode.id }).then(res => {
@@ -437,7 +437,7 @@ export default {
         })
       }
     },
-    // 切换部门
+    // 切换学院
     handleNodeClick(data) {
       if (data.pid === 0) {
         this.query.deptId = null
@@ -468,7 +468,7 @@ export default {
         this.roles = res
       }).catch(() => { })
     },
-    // 获取弹窗内岗位数据
+    // 获取弹窗内身份数据
     getJobs() {
       getAllJob().then(res => {
         this.jobs = res.content
