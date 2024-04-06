@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: 'ELADMIN-后台管理',
+      title: '新苗同学-后台管理',
       logo: Logo
     }
   }

@@ -15,14 +15,14 @@
 */
 package org.yuanshen.service.impl;
 
-import org.yuanshen.domain.TaskList;
+import org.yuanshen.domain.CustomList;
 import me.zhengjie.utils.FileUtil;
 import lombok.RequiredArgsConstructor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.yuanshen.service.TaskListService;
-import org.yuanshen.domain.vo.TaskListQueryCriteria;
-import org.yuanshen.mapper.TaskListMapper;
+import org.yuanshen.service.CustomListService;
+import org.yuanshen.domain.vo.CustomListQueryCriteria;
+import org.yuanshen.mapper.CustomListMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import me.zhengjie.utils.PageUtil;
@@ -36,37 +36,37 @@ import me.zhengjie.utils.PageResult;
 
 /**
 * @description 服务实现
-* @author hugo
-* @date 2024-04-02
+* @author org.yuanshen
+* @date 2024-04-06
 **/
 @Service
 @RequiredArgsConstructor
-public class TaskListServiceImpl extends ServiceImpl<TaskListMapper, TaskList> implements TaskListService {
+public class CustomListServiceImpl extends ServiceImpl<CustomListMapper, CustomList> implements CustomListService {
 
-    private final TaskListMapper taskListMapper;
+    private final CustomListMapper customListMapper;
 
     @Override
-    public PageResult<TaskList> queryAll(TaskListQueryCriteria criteria, Page<Object> page){
-        return PageUtil.toPage(taskListMapper.findAll(criteria, page));
+    public PageResult<CustomList> queryAll(CustomListQueryCriteria criteria, Page<Object> page){
+        return PageUtil.toPage(customListMapper.findAll(criteria, page));
     }
 
     @Override
-    public List<TaskList> queryAll(TaskListQueryCriteria criteria){
-        return taskListMapper.findAll(criteria);
+    public List<CustomList> queryAll(CustomListQueryCriteria criteria){
+        return customListMapper.findAll(criteria);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void create(TaskList resources) {
+    public void create(CustomList resources) {
         save(resources);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(TaskList resources) {
-        TaskList taskList = getById(resources.getId());
-        taskList.copy(resources);
-        saveOrUpdate(taskList);
+    public void update(CustomList resources) {
+        CustomList customList = getById(resources.getCustomId());
+        customList.copy(resources);
+        saveOrUpdate(customList);
     }
 
     @Override
@@ -76,17 +76,11 @@ public class TaskListServiceImpl extends ServiceImpl<TaskListMapper, TaskList> i
     }
 
     @Override
-    public void download(List<TaskList> all, HttpServletResponse response) throws IOException {
+    public void download(List<CustomList> all, HttpServletResponse response) throws IOException {
         List<Map<String, Object>> list = new ArrayList<>();
-        for (TaskList taskList : all) {
+        for (CustomList customList : all) {
             Map<String,Object> map = new LinkedHashMap<>();
-            map.put("打卡标签", taskList.getTag());
-            map.put("打卡内容（类似标题）", taskList.getContent());
-            map.put("打卡积分", taskList.getMoney());
-            map.put("打卡任务描述", taskList.getDescription());
-            map.put("是否为主线任务", taskList.getMain());
-            map.put("时间", taskList.getShow());
-            map.put("是否展示卡片", taskList.getCardshow());
+            map.put(" customCost",  customList.getCustomCost());
             list.add(map);
         }
         FileUtil.downloadExcel(list, response);

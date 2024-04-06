@@ -15,56 +15,33 @@
 */
 package org.yuanshen.domain;
 
+import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import io.swagger.annotations.ApiModelProperty;
 import cn.hutool.core.bean.copier.CopyOptions;
-import java.sql.Timestamp;
 import java.io.Serializable;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
 * @description /
-* @author hugo
-* @date 2024-04-02
+* @author org.yuanshen
+* @date 2024-04-06
 **/
 @Data
-@TableName("task_list")
-public class TaskList implements Serializable {
+@TableName("custom_list")
+public class CustomList implements Serializable {
 
-    @TableId(value = "id")
-    @ApiModelProperty(value = "打卡任务id")
-    private Integer id;
-
-    @NotBlank
-    @ApiModelProperty(value = "打卡标签")
-    private String tag;
-
-    @NotBlank
-    @ApiModelProperty(value = "打卡内容（类似标题）")
-    private String content;
+    @TableId(value = "custom_id")
+    @ApiModelProperty(value = "customId")
+    private Integer customId;
 
     @NotNull
-    @ApiModelProperty(value = "打卡积分")
-    private Integer money;
+    @ApiModelProperty(value = "customCost")
+    private Integer customCost;
 
-    @NotBlank
-    @ApiModelProperty(value = "打卡任务描述")
-    private String description;
-
-    @NotNull
-    @ApiModelProperty(value = "是否为主线任务")
-    private Integer main;
-
-    @ApiModelProperty(value = "时间")
-    private Timestamp show;
-
-    @NotNull
-    @ApiModelProperty(value = "是否展示卡片")
-    private Integer cardshow;
-
-    public void copy(TaskList source){
+    public void copy(CustomList source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
     }
 }

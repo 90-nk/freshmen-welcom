@@ -16,18 +16,13 @@
 package org.yuanshen.domain.vo;
 
 import lombok.Data;
-import java.sql.Timestamp;
-import java.util.List;
 
 /**
-* @author hugo
-* @date 2024-04-02
+* @author org.yuanshen
+* @date 2024-04-06
 **/
 @Data
-public class TaskListQueryCriteria{
-    private Integer id;
-    private Integer money;
-    private Integer main;
-    private Integer cardshow;
-    private List<Timestamp> show;
+public class CustomListQueryCriteria{
+    private Integer customId;
+    private Integer customCost;
 }

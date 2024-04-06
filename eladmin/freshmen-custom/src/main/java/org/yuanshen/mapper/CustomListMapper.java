@@ -15,8 +15,8 @@
 */
 package org.yuanshen.mapper;
 
-import org.yuanshen.domain.TaskList;
-import org.yuanshen.domain.vo.TaskListQueryCriteria;
+import org.yuanshen.domain.CustomList;
+import org.yuanshen.domain.vo.CustomListQueryCriteria;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,13 +25,13 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
-* @author hugo
-* @date 2024-04-02
+* @author org.yuanshen
+* @date 2024-04-06
 **/
 @Mapper
-public interface TaskListMapper extends BaseMapper<TaskList> {
+public interface CustomListMapper extends BaseMapper<CustomList> {
 
-    IPage<TaskList> findAll(@Param("criteria") TaskListQueryCriteria criteria, Page<Object> page);
+    IPage<CustomList> findAll(@Param("criteria") CustomListQueryCriteria criteria, Page<Object> page);
 
-    List<TaskList> findAll(@Param("criteria") TaskListQueryCriteria criteria);
+    List<CustomList> findAll(@Param("criteria") CustomListQueryCriteria criteria);
 }

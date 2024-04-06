@@ -17,6 +17,7 @@
         <module>eladmin-generator</module>
         <module>freshmen-task</module>
         <module>freshmen-task</module>
+        <module>freshmen-custom</module>
     </modules>
 
     <name>ELADMIN 后台管理</name>

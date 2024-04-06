@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.yuanshen.mapper.CustomListMapper">
+    <resultMap id="BaseResultMap" type="org.yuanshen.domain.CustomList">
+        <id column="custom_id" property="customId"/>
+        <result column="custom_cost" property="customCost"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        custom_id, custom_cost
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from custom_list
+        <where>
+            <if test="criteria.customId != null">
+                and custom_id = #{criteria.customId}
+            </if>
+            <if test="criteria.customCost != null">
+                and custom_cost = #{criteria.customCost}
+            </if>
+        </where>
+        order by custom_id desc
+    </select>
+</mapper>

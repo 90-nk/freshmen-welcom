@@ -15,8 +15,8 @@
 */
 package org.yuanshen.service;
 
-import org.yuanshen.domain.TaskList;
-import org.yuanshen.domain.vo.TaskListQueryCriteria;
+import org.yuanshen.domain.CustomList;
+import org.yuanshen.domain.vo.CustomListQueryCriteria;
 import java.util.Map;
 import java.util.List;
 import java.io.IOException;
@@ -27,10 +27,10 @@ import me.zhengjie.utils.PageResult;
 
 /**
 * @description 服务接口
-* @author hugo
-* @date 2024-04-02
+* @author org.yuanshen
+* @date 2024-04-06
 **/
-public interface TaskListService extends IService<TaskList> {
+public interface CustomListService extends IService<CustomList> {
 
     /**
     * 查询数据分页
@@ -38,26 +38,26 @@ public interface TaskListService extends IService<TaskList> {
     * @param page 分页参数
     * @return PageResult
     */
-    PageResult<TaskList> queryAll(TaskListQueryCriteria criteria, Page<Object> page);
+    PageResult<CustomList> queryAll(CustomListQueryCriteria criteria, Page<Object> page);
 
     /**
     * 查询所有数据不分页
     * @param criteria 条件参数
-    * @return List<TaskListDto>
+    * @return List<CustomListDto>
     */
-    List<TaskList> queryAll(TaskListQueryCriteria criteria);
+    List<CustomList> queryAll(CustomListQueryCriteria criteria);
 
     /**
     * 创建
     * @param resources /
     */
-    void create(TaskList resources);
+    void create(CustomList resources);
 
     /**
     * 编辑
     * @param resources /
     */
-    void update(TaskList resources);
+    void update(CustomList resources);
 
     /**
     * 多选删除
@@ -71,5 +71,5 @@ public interface TaskListService extends IService<TaskList> {
     * @param response /
     * @throws IOException /
     */
-    void download(List<TaskList> all, HttpServletResponse response) throws IOException;
+    void download(List<CustomList> all, HttpServletResponse response) throws IOException;
 }
